@@ -13,18 +13,15 @@ public class TokenImplementation implements Token {
 		this.character = character;
 	}
 	
-	
-	@Override
+
 	public String getValue() {
 		return null;
 	}
 
-	@Override
 	public int getType() {
 		return type;
 	}
 
-	@Override
 	public int getPrecedence() {
 		// TODO Auto-generated method stub
 		return 0;
