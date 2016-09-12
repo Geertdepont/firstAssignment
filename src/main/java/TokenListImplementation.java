@@ -2,16 +2,16 @@
 public class TokenListImplementation implements TokenList {
 	static final int MAX_ELEMENTS = 300;
 	
-	TokenImplementation[] tokenRow;
+	Token[] tokenRow;
 	int numberOfElements;
 	 
 	 TokenListImplementation(){
-		 tokenRow = new TokenImplementation[MAX_ELEMENTS];
+		 tokenRow = new Token[MAX_ELEMENTS];
 		 numberOfElements = 0;
 	 }
 	 
 	public void add(Token token) {
-		tokenRow[numberOfElements] = (TokenImplementation) token;
+		tokenRow[numberOfElements] = token;
 		numberOfElements +=1;
 	}
 
@@ -25,7 +25,7 @@ public class TokenListImplementation implements TokenList {
 	}
 
 	public void set(int index, Token token) {
-		tokenRow[index] = (TokenImplementation)token;
+		tokenRow[index] = token;
 	}
 
 	public Token get(int index) {
@@ -36,5 +36,5 @@ public class TokenListImplementation implements TokenList {
 	public int size() {
 		return numberOfElements;
 	}
-
+	
 }
