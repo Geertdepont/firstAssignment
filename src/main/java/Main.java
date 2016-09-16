@@ -5,12 +5,15 @@ import java.util.Scanner;
 
 public class Main implements CalculatorInterface {
 	static final String OPERATOR_TOKENS = "+-*/^";
+	static final String PARENTHESIS_TOKENS = "()";
 	static final String ADDITION = "+";
 	static final String SUBTRACTION = "-";
 	static final String MULTIPLICATION = "*";
 	static final String DIVISION = "/";
 	static final String POWER = "^";
-	static final String PARENTHESIS_TOKENS = "()";
+	static final String LEFT_PARENTHESIS = "(";
+	static final String RIGHT_PARENTHESIS = ")";
+
 
     public TokenList readTokens(String input) {
         TokenListImpl result = new TokenListImpl(); 
@@ -30,10 +33,7 @@ public class Main implements CalculatorInterface {
         		//Error
         		System.out.println("Input invalid, try again");
         	}
-        	
-        	
         }
-        // read token from input put it in result;
         return result;
     }
     
@@ -106,7 +106,36 @@ public class Main implements CalculatorInterface {
     }
 
     public TokenList shuntingYard(TokenList tokens) {
-        return null;
+    	TokenList outputList = new TokenListImpl();
+    	TokenStack stack = new TokenStackImpl();
+    	
+    	for(int i=0; i<tokens.size();i++){
+    		Token token = tokens.get(i);
+    		if(token.getType()==Token.NUMBER_TYPE){
+        		outputList.add(token);
+        	}
+    		else if(token.getType()== Token.OPERATOR_TYPE){
+    			while(!stack.isEmpty() && token.getPrecedence()<stack.top().getPrecedence()){
+    				outputList.add(stack.pop());
+    			}
+    			stack.push(token);
+    		}
+    		if(token.getValue().equals(LEFT_PARENTHESIS)){
+    			stack.push(token);
+    		}
+    		if(token.getValue().equals(RIGHT_PARENTHESIS)){
+    			while(!stack.top().getValue().equals(LEFT_PARENTHESIS)){
+    				outputList.add(stack.pop());
+    			}
+    			stack.pop();
+    		}
+    	}
+    	int counter = stack.size();
+    	for(int k=0; k<counter;k++){
+    		outputList.add(stack.pop());
+    	}
+    	
+    	return outputList;
     }
     
     boolean equals(Token obj){
@@ -117,11 +146,14 @@ public class Main implements CalculatorInterface {
     private void start() {
     	Scanner in = new Scanner(System.in);
     	while(in.hasNext()){
+    		
     		TokenListImpl example = (TokenListImpl) readTokens(in.nextLine());
-//    		for(int i= 0; i<example.size();i++){
+    		TokenListImpl ordered = (TokenListImpl) shuntingYard(example);
+    		
+    		//for(int i= 0; i<example.size();i++){
 //    			System.out.println(example.tokenRow[i].getType());
 //    		}
-    		System.out.println(rpn(example));
+    		System.out.println(rpn(ordered));
     		
     		
     	}

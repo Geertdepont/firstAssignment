@@ -53,8 +53,9 @@ public class TokenStackImpl implements TokenStack{
 
 	@Override
 	public Token top() {
-//		return new TokenImplementation(stackArray[numberOfElements-1]);//returns a copy of the TOS instead of the TOS itself
-		return null;
+		return stackArray[numberOfElements-1];
+		//return new TokenImplementation(stackArray[numberOfElements-1]);//returns a copy of the TOS instead of the TOS itself
+		//return null;
 	}
 
 	@Override
@@ -63,7 +64,7 @@ public class TokenStackImpl implements TokenStack{
 	}
 	
 	//We probably need to add this to the interface, if we need it at all
-	boolean isEmpty(){
+	public boolean isEmpty(){
 		return numberOfElements==0;
 	}
 
