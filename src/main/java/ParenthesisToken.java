@@ -2,7 +2,6 @@
 public class ParenthesisToken implements Token{
 
 	private static final int PRECEDENCE=-1;
-	
 	private String value;
 	
 	ParenthesisToken(){//default constructor

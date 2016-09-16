@@ -1,26 +1,34 @@
 
-public class DoubleStackImplementation implements DoubleStack{
+public class DoubleStackImpl implements DoubleStack{
 
 	static final int INITIAL_ARRAY_SIZE=100;
 	Double[] stackArray;
 	int numberOfElements;
 	
-	DoubleStackImplementation(){
+	DoubleStackImpl(){
 		stackArray=new Double[INITIAL_ARRAY_SIZE];
 		numberOfElements=0;
 	}
 	
-	DoubleStackImplementation(DoubleStackImplementation source){
+	DoubleStackImpl(DoubleStackImpl source){
 		stackArray=new Double[source.stackArray.length];
 		numberOfElements=source.numberOfElements;
-		copyElements(stackArray,source.stackArray,numberOfElements);
+		stackArray = copyElements(stackArray,source.stackArray,numberOfElements);
 	}
 	
-	void copyElements(Double[] destination, Double[] source, int numberOfElements){
+	Double[] copyElements(Double[] destination, Double[] source, int numberOfElements){
 		for(int i=0;i<numberOfElements;i++){
 			destination[i]=source[i];
 		}
+		return destination;
 	}
+	
+	
+//	void copyElements(Double[] destination, Double[] source, int numberOfElements){
+//		for(int i=0;i<numberOfElements;i++){
+//			destination[i]=source[i];
+//		}
+//	}
 	
 	void increaseStackSize(){
 		int newStackArraySize=stackArray.length*2;

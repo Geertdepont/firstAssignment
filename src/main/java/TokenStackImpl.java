@@ -1,26 +1,33 @@
 
-public class TokenStackImplementation implements TokenStack{
+public class TokenStackImpl implements TokenStack{
 	
 	static final int INITIAL_ARRAY_SIZE=100;
 	Token[] stackArray;
 	int numberOfElements;
 
-	TokenStackImplementation(){
+	TokenStackImpl(){
 		stackArray=new Token[INITIAL_ARRAY_SIZE];
 		numberOfElements=0;
 	}
 	
-	TokenStackImplementation(TokenStackImplementation source){
+	TokenStackImpl(TokenStackImpl source){
 		stackArray=new Token[source.stackArray.length];
 		numberOfElements=source.numberOfElements;
-		copyElements(stackArray,source.stackArray,numberOfElements);
+		stackArray = copyElements(stackArray,source.stackArray,numberOfElements);
 	}
 	
-	void copyElements(Token[] destination, Token[] source, int numberOfElements){
+	Token[] copyElements(Token[] destination, Token[] source, int numberOfElements){
 		for(int i=0;i<numberOfElements;i++){
 			destination[i]=source[i];
 		}
+		return destination;
 	}
+	
+//	void copyElements(Token[] destination, Token[] source, int numberOfElements){
+//		for(int i=0;i<numberOfElements;i++){
+//			destination[i]=source[i];
+//		}
+//	}
 	
 	void increaseStackSize(){
 		int newStackArraySize=stackArray.length*2;

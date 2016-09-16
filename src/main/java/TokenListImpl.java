@@ -1,14 +1,28 @@
 
-public class TokenListImplementation implements TokenList {
+public class TokenListImpl implements TokenList {
 	static final int MAX_ELEMENTS = 300;
 	
 	Token[] tokenRow;
 	int numberOfElements;
 	 
-	 TokenListImplementation(){
-		 tokenRow = new Token[MAX_ELEMENTS];
-		 numberOfElements = 0;
-	 }
+	TokenListImpl(){
+		tokenRow = new Token[MAX_ELEMENTS];
+		numberOfElements = 0;
+	}
+	
+	TokenListImpl(TokenListImpl tokenList){//copy constructor
+		tokenRow = new Token[tokenList.tokenRow.length];
+		tokenRow = copyElements(tokenRow,tokenList.tokenRow,numberOfElements);
+		numberOfElements = tokenList.numberOfElements;
+	}
+	 
+	Token[] copyElements(Token[] destination, Token[] source, int numberOfElements){
+		for(int i=0;i<numberOfElements;i++){
+			destination[i]=source[i];
+		}
+		return destination;
+	}
+	 
 	 
 	public void add(Token token) {
 		tokenRow[numberOfElements] = token;

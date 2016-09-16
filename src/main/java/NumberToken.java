@@ -3,23 +3,23 @@ public class NumberToken implements Token {
 	
 	private static final int PRECEDENCE=-1;
 	
-	private String value;
+	private double value;// depends if this should be a string
 	
 	NumberToken(){//default constructor
-		value="";
+		value=0;
 	}
 	
 	NumberToken(NumberToken token){//copy constructor
 		value=token.value;
 	}
 	
-	NumberToken(String token){//the constructor that takes a String as parameter
+	NumberToken(double token){//the constructor that takes a String as parameter
 		value=token;
 	}
 
 	@Override
 	public String getValue() {
-		return value;
+		return Double.toString(value);
 	}
 
 	@Override
