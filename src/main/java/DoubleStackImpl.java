@@ -32,7 +32,7 @@ public class DoubleStackImpl implements DoubleStack{
 	void increaseStackSize(){
 		int newStackArraySize=stackArray.length*2;
 		Double[] newStackArray=new Double[newStackArraySize];
-		copyElements(newStackArray,stackArray,stackArray.length);
+		copyElements(newStackArray,stackArray,stackArray.length);//to be fixed
 		stackArray=newStackArray;
 	}
 	
@@ -59,10 +59,5 @@ public class DoubleStackImpl implements DoubleStack{
 	@Override
 	public int size(){
 		return numberOfElements;
-	}
-	
-	//We probably need to add this to the interface, if we need it at all
-	boolean isEmpty(){
-		return numberOfElements==0;
 	}
 }

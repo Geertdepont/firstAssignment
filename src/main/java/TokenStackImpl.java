@@ -33,7 +33,7 @@ public class TokenStackImpl implements TokenStack{
 	void increaseStackSize(){
 		int newStackArraySize=stackArray.length*2;
 		Token[] newStackArray=new Token[newStackArraySize];
-		copyElements(newStackArray,stackArray,stackArray.length);
+		copyElements(newStackArray,stackArray,stackArray.length);//to be fixed
 		stackArray=newStackArray;
 	}
 	
@@ -64,7 +64,6 @@ public class TokenStackImpl implements TokenStack{
 		return numberOfElements;
 	}
 	
-	//We probably need to add this to the interface, if we need it at all
 	public boolean isEmpty(){
 		return numberOfElements==0;
 	}

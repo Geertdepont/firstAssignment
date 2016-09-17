@@ -1,3 +1,4 @@
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,12 +16,20 @@ public class Main implements CalculatorInterface{
 	static final String LEFT_PARENTHESIS="(";
 	static final String RIGHT_PARENTHESIS=")";
 	
-	public TokenList readTokens(String input){
+	PrintStream out;
+	InputStream in;
+	
+	Main(){
+		out=System.out;
+		in=System.in;
+	}
+	
+	public TokenList readTokens(String expression){
 		TokenListImpl result=new TokenListImpl();
-		Scanner in=new Scanner(input);
+		Scanner expressionScanner=new Scanner(expression);
 		
-		while(in.hasNext()){
-			String token=in.next();
+		while(expressionScanner.hasNext()){
+			String token=expressionScanner.next();
 			
 			if(tokenIsDouble(token)){
 				result.add(parseNumber(token));
@@ -30,7 +39,7 @@ public class Main implements CalculatorInterface{
 				result.add(parseParenthesis(token));
 			}else{
 				//Error
-				System.out.println("Input invalid, try again");
+				out.println("Input invalid, try again");
 			}
 		}
 		return result;
@@ -49,25 +58,25 @@ public class Main implements CalculatorInterface{
 	}
 	
 	public boolean tokenIsOperator(String token){
-    	Scanner in=new Scanner(token);
-    	return OPERATOR_TOKENS.contains(in.next()); // not sure if this works
+    	Scanner tokenScanner=new Scanner(token);
+    	return OPERATOR_TOKENS.contains(tokenScanner.next()); // not sure if this works
     }
 	
 	public boolean tokenIsDouble(String token){	
-    	Scanner in=new Scanner(token);
-    	return in.hasNextDouble();
+    	Scanner tokenScanner=new Scanner(token);
+    	return tokenScanner.hasNextDouble();
     }
 	
 	public boolean tokenIsParenthesis(String token){
-    	Scanner in=new Scanner(token);
-    	return PARENTHESIS_TOKENS.contains(in.next()); // not sure if this works
+    	Scanner tokenScanner=new Scanner(token);
+    	return PARENTHESIS_TOKENS.contains(tokenScanner.next()); // not sure if this works
     }
 	
-	public Double rpn(TokenList tokens){
+	public Double rpn(TokenList rpnExpression){
 		DoubleStack stack=new DoubleStackImpl();
 		
-		for(int i=0; i<tokens.size();i++){
-			Token token=tokens.get(i);
+		for(int i=0; i<rpnExpression.size();i++){
+			Token token=rpnExpression.get(i);
 			
 			if(token.getType()==Token.NUMBER_TYPE){
 				stack.push(Double.parseDouble(token.getValue()));
@@ -91,57 +100,55 @@ public class Main implements CalculatorInterface{
 		if(stack.size()==1){
 			return stack.pop();
 		}else{
-			System.out.println("An error occured");
+			out.println("An error occured");
 			return null;
 		}
 	}
 	
-	public TokenList shuntingYard(TokenList tokens){
-		TokenList outputList=new TokenListImpl();
-		TokenStack stack=new TokenStackImpl();
+	public TokenList shuntingYard(TokenList expression){
+		TokenList rpnExpression=new TokenListImpl();
+		TokenStack operatorStack=new TokenStackImpl();
 		
-		for(int i=0;i<tokens.size();i++){
-			Token token=tokens.get(i);
+		for(int i=0;i<expression.size();i++){
+			Token token=expression.get(i);
 			if(token.getType()==Token.NUMBER_TYPE){
-				outputList.add(token);
+				rpnExpression.add(token);
 			}else if(token.getType()==Token.OPERATOR_TYPE){
-				while(!stack.isEmpty() && token.getPrecedence()<stack.top().getPrecedence()){
-					outputList.add(stack.pop());
+				while(!operatorStack.isEmpty() && token.getPrecedence()<operatorStack.top().getPrecedence()){
+					rpnExpression.add(operatorStack.pop());
 				}
-				stack.push(token);
+				operatorStack.push(token);
 			}
 			if(token.getValue().equals(LEFT_PARENTHESIS)){
-				stack.push(token);
+				operatorStack.push(token);
 			}
 			if(token.getValue().equals(RIGHT_PARENTHESIS)){
-				while(!stack.top().getValue().equals(LEFT_PARENTHESIS)){
-					outputList.add(stack.pop());
+				while(!operatorStack.top().getValue().equals(LEFT_PARENTHESIS)){
+					rpnExpression.add(operatorStack.pop());
 				}
-				stack.pop();
+				operatorStack.pop();
 			}
 		}
-		int counter=stack.size();
-		for(int k=0;k<counter;k++){
-			outputList.add(stack.pop());
+		for(int i=0;i<operatorStack.size();i++){
+			rpnExpression.add(operatorStack.pop());
 		}
-		return outputList;
+		return rpnExpression;
 	}
 	
 	boolean equals(Token obj){
 		return true;
 	}
-	
 	private void start(){
-		Scanner in=new Scanner(System.in);
-		while(in.hasNext()){
-			
-			TokenListImpl example=(TokenListImpl) readTokens(in.nextLine());
+		Scanner inputScanner=new Scanner(in);
+		
+		while(inputScanner.hasNext()){
+			TokenListImpl example=(TokenListImpl) readTokens(inputScanner.nextLine());
 			TokenListImpl ordered=(TokenListImpl) shuntingYard(example);
 			
 //			for(int i= 0; i<example.size();i++){
 //				System.out.println(example.tokenRow[i].getType());
 //			}
-			System.out.println(rpn(ordered));
+			out.println(rpn(ordered));
 		}
 //		Create a scanner on System.in
 //		While there is input, read line and parse it.
