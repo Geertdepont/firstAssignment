@@ -2,6 +2,7 @@
 public class ParenthesisToken implements Token{
 
 	private static final int PRECEDENCE=-1;
+	
 	private String value;
 	
 	ParenthesisToken(){//default constructor
@@ -17,18 +18,17 @@ public class ParenthesisToken implements Token{
 	}
 	
 	@Override
-	public String getValue() {
+	public String getValue(){
 		return value;
 	}
 
 	@Override
-	public int getType() {
+	public int getType(){
 		return PARENTHESIS_TYPE;
 	}
 
 	@Override
-	public int getPrecedence() {
+	public int getPrecedence(){
 		return PRECEDENCE;
 	}
-
 }

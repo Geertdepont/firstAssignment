@@ -2,6 +2,7 @@
 public class TokenStackImpl implements TokenStack{
 	
 	static final int INITIAL_ARRAY_SIZE=100;
+	
 	Token[] stackArray;
 	int numberOfElements;
 
@@ -13,7 +14,7 @@ public class TokenStackImpl implements TokenStack{
 	TokenStackImpl(TokenStackImpl source){
 		stackArray=new Token[source.stackArray.length];
 		numberOfElements=source.numberOfElements;
-		stackArray = copyElements(stackArray,source.stackArray,numberOfElements);
+		stackArray=copyElements(stackArray,source.stackArray,numberOfElements);
 	}
 	
 	Token[] copyElements(Token[] destination, Token[] source, int numberOfElements){
@@ -37,7 +38,7 @@ public class TokenStackImpl implements TokenStack{
 	}
 	
 	@Override
-	public void push(Token token) {
+	public void push(Token token){
 		if(numberOfElements==stackArray.length){
 			increaseStackSize();
 		}
@@ -46,13 +47,13 @@ public class TokenStackImpl implements TokenStack{
 	}
 
 	@Override
-	public Token pop() {
+	public Token pop(){
 		numberOfElements-=1;
 		return stackArray[numberOfElements];
 	}
 
 	@Override
-	public Token top() {
+	public Token top(){
 		return stackArray[numberOfElements-1];
 		//return new TokenImplementation(stackArray[numberOfElements-1]);//returns a copy of the TOS instead of the TOS itself
 		//return null;
@@ -67,5 +68,4 @@ public class TokenStackImpl implements TokenStack{
 	public boolean isEmpty(){
 		return numberOfElements==0;
 	}
-
 }

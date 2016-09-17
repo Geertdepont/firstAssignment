@@ -1,19 +1,20 @@
 
-public class TokenListImpl implements TokenList {
-	static final int MAX_ELEMENTS = 300;
+public class TokenListImpl implements TokenList{
+	
+	static final int MAX_ELEMENTS=300;
 	
 	Token[] tokenRow;
 	int numberOfElements;
 	 
 	TokenListImpl(){
-		tokenRow = new Token[MAX_ELEMENTS];
-		numberOfElements = 0;
+		tokenRow=new Token[MAX_ELEMENTS];
+		numberOfElements=0;
 	}
 	
 	TokenListImpl(TokenListImpl tokenList){//copy constructor
-		tokenRow = new Token[tokenList.tokenRow.length];
-		tokenRow = copyElements(tokenRow,tokenList.tokenRow,numberOfElements);
-		numberOfElements = tokenList.numberOfElements;
+		tokenRow=new Token[tokenList.tokenRow.length];
+		tokenRow=copyElements(tokenRow,tokenList.tokenRow,numberOfElements);
+		numberOfElements=tokenList.numberOfElements;
 	}
 	 
 	Token[] copyElements(Token[] destination, Token[] source, int numberOfElements){
@@ -24,31 +25,30 @@ public class TokenListImpl implements TokenList {
 	}
 	 
 	 
-	public void add(Token token) {
-		tokenRow[numberOfElements] = token;
+	public void add(Token token){
+		tokenRow[numberOfElements]=token;
 		numberOfElements +=1;
 	}
 
 	//Assuming the index starts with 0
 
-	public void remove(int index) {
-		for(int i=index; i<numberOfElements; i++){
-			tokenRow[i]= tokenRow[i+1];
+	public void remove(int index){
+		for(int i=index;i<numberOfElements;i++){
+			tokenRow[i]=tokenRow[i+1];
 		}
-		numberOfElements -=1;
+		numberOfElements-=1;
 	}
 
-	public void set(int index, Token token) {
-		tokenRow[index] = token;
+	public void set(int index, Token token){
+		tokenRow[index]=token;
 	}
 
-	public Token get(int index) {
+	public Token get(int index){
 		return tokenRow[index];
 	}
 
 	
-	public int size() {
+	public int size(){
 		return numberOfElements;
 	}
-	
 }

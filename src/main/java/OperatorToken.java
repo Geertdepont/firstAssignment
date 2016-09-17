@@ -1,5 +1,5 @@
 
-public class OperatorToken implements Token {
+public class OperatorToken implements Token{
 
 	private static final String OPERATORS_WITH_HIGHEST_PRECEDENCE="^";
 	private static final String OPERATORS_WITH_SECOND_HIGHEST_PRECEDENCE="*/";
@@ -23,17 +23,17 @@ public class OperatorToken implements Token {
 	}
 	
 	@Override
-	public String getValue() {
+	public String getValue(){
 		return value;
 	}
 
 	@Override
-	public int getType() {
+	public int getType(){
 		return OPERATOR_TYPE;
 	}
 
 	@Override
-	public int getPrecedence() {
+	public int getPrecedence(){
 		if(OPERATORS_WITH_HIGHEST_PRECEDENCE.contains(value)){
 			return HIGHEST_PRECEDENCE;
 		}else if(OPERATORS_WITH_SECOND_HIGHEST_PRECEDENCE.contains(value)){
@@ -45,5 +45,4 @@ public class OperatorToken implements Token {
 			return 0;
 		}
 	}
-
 }

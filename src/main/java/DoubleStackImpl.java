@@ -13,7 +13,7 @@ public class DoubleStackImpl implements DoubleStack{
 	DoubleStackImpl(DoubleStackImpl source){
 		stackArray=new Double[source.stackArray.length];
 		numberOfElements=source.numberOfElements;
-		stackArray = copyElements(stackArray,source.stackArray,numberOfElements);
+		stackArray=copyElements(stackArray,source.stackArray,numberOfElements);
 	}
 	
 	Double[] copyElements(Double[] destination, Double[] source, int numberOfElements){
@@ -22,7 +22,6 @@ public class DoubleStackImpl implements DoubleStack{
 		}
 		return destination;
 	}
-	
 	
 //	void copyElements(Double[] destination, Double[] source, int numberOfElements){
 //		for(int i=0;i<numberOfElements;i++){
@@ -38,7 +37,7 @@ public class DoubleStackImpl implements DoubleStack{
 	}
 	
 	@Override
-	public void push(Double element) {
+	public void push(Double element){
 		if(numberOfElements==stackArray.length){
 			increaseStackSize();
 		}
@@ -47,18 +46,18 @@ public class DoubleStackImpl implements DoubleStack{
 	}
 
 	@Override
-	public Double pop() {
+	public Double pop(){
 		numberOfElements-=1;
 		return stackArray[numberOfElements];
 	}
 
 	@Override
-	public Double top() {
+	public Double top(){
 		return stackArray[numberOfElements-1];
 	}
 
 	@Override
-	public int size() {
+	public int size(){
 		return numberOfElements;
 	}
 	
@@ -66,5 +65,4 @@ public class DoubleStackImpl implements DoubleStack{
 	boolean isEmpty(){
 		return numberOfElements==0;
 	}
-
 }

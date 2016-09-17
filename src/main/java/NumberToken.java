@@ -1,5 +1,5 @@
 
-public class NumberToken implements Token {
+public class NumberToken implements Token{
 	
 	private static final int PRECEDENCE=-1;
 	
@@ -18,18 +18,17 @@ public class NumberToken implements Token {
 	}
 
 	@Override
-	public String getValue() {
+	public String getValue(){
 		return Double.toString(value);
 	}
 
 	@Override
-	public int getType() {
+	public int getType(){
 		return NUMBER_TYPE;
 	}
 
 	@Override
-	public int getPrecedence() {
+	public int getPrecedence(){
 		return PRECEDENCE;
 	}
-	
 }
