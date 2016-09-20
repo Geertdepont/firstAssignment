@@ -1,33 +1,26 @@
 
 public class DoubleStackImpl implements DoubleStack{
 
-	static final int INITIAL_ARRAY_SIZE=100;
+	static final int INITIAL_MAX_NUMBER_OF_ELEMENTS=1;
 	Double[] stackArray;
 	int numberOfElements;
 	
 	DoubleStackImpl(){
-		stackArray=new Double[INITIAL_ARRAY_SIZE];
+		stackArray=new Double[INITIAL_MAX_NUMBER_OF_ELEMENTS];
 		numberOfElements=0;
 	}
 	
 	DoubleStackImpl(DoubleStackImpl source){
 		stackArray=new Double[source.stackArray.length];
 		numberOfElements=source.numberOfElements;
-		stackArray=copyElements(stackArray,source.stackArray,numberOfElements);
+		copyElements(stackArray,source.stackArray,numberOfElements);
 	}
 	
-	Double[] copyElements(Double[] destination, Double[] source, int numberOfElements){
+	void copyElements(Double[] destination, Double[] source, int numberOfElements){
 		for(int i=0;i<numberOfElements;i++){
-			destination[i]=source[i];
+			destination[i]=source[i].doubleValue();
 		}
-		return destination;
 	}
-	
-//	void copyElements(Double[] destination, Double[] source, int numberOfElements){
-//		for(int i=0;i<numberOfElements;i++){
-//			destination[i]=source[i];
-//		}
-//	}
 	
 	void increaseStackSize(){
 		int newStackArraySize=stackArray.length*2;
@@ -53,7 +46,7 @@ public class DoubleStackImpl implements DoubleStack{
 
 	@Override
 	public Double top(){
-		return stackArray[numberOfElements-1];
+		return new Double(stackArray[numberOfElements-1].doubleValue());
 	}
 
 	@Override

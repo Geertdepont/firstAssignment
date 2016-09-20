@@ -1,34 +1,33 @@
 
 public class TokenStackImpl implements TokenStack{
 	
-	static final int INITIAL_ARRAY_SIZE=100;
+	static final int INITIAL_MAX_NUMBER_OF_ELEMENTS=1;//size 1 is for testing purposes of copyElements/ increaseListSize
 	
 	Token[] stackArray;
 	int numberOfElements;
 
 	TokenStackImpl(){
-		stackArray=new Token[INITIAL_ARRAY_SIZE];
+		stackArray=new Token[INITIAL_MAX_NUMBER_OF_ELEMENTS];
 		numberOfElements=0;
 	}
 	
 	TokenStackImpl(TokenStackImpl source){
 		stackArray=new Token[source.stackArray.length];
 		numberOfElements=source.numberOfElements;
-		stackArray=copyElements(stackArray,source.stackArray,numberOfElements);
+		copyElements(stackArray,source.stackArray,numberOfElements);
 	}
 	
-	Token[] copyElements(Token[] destination, Token[] source, int numberOfElements){
+	void copyElements(Token[] destination, Token[] source, int numberOfElements){
 		for(int i=0;i<numberOfElements;i++){
-			destination[i]=source[i];
+			if(source[i].getType()==Token.NUMBER_TYPE){
+				destination[i]=new NumberToken((NumberToken)source[i]);
+			}else if(source[i].getType()==Token.OPERATOR_TYPE){
+				destination[i]=new OperatorToken((OperatorToken)source[i]);
+			}else{//parenthesis token
+				destination[i]=new ParenthesisToken((ParenthesisToken)source[i]);
+			}
 		}
-		return destination;
 	}
-	
-//	void copyElements(Token[] destination, Token[] source, int numberOfElements){
-//		for(int i=0;i<numberOfElements;i++){
-//			destination[i]=source[i];
-//		}
-//	}
 	
 	void increaseStackSize(){
 		int newStackArraySize=stackArray.length*2;
@@ -54,9 +53,13 @@ public class TokenStackImpl implements TokenStack{
 
 	@Override
 	public Token top(){
-		return stackArray[numberOfElements-1];
-		//return new TokenImplementation(stackArray[numberOfElements-1]);//returns a copy of the TOS instead of the TOS itself
-		//return null;
+		if(stackArray[numberOfElements-1].getType()==Token.NUMBER_TYPE){
+			return new NumberToken((NumberToken)stackArray[numberOfElements-1]);
+		}else if(stackArray[numberOfElements-1].getType()==Token.OPERATOR_TYPE){
+			return new OperatorToken((OperatorToken)stackArray[numberOfElements-1]);
+		}else{//parenthesis token
+			return new ParenthesisToken((ParenthesisToken)stackArray[numberOfElements-1]);
+		}
 	}
 
 	@Override
