@@ -1,7 +1,7 @@
 
 public class DoubleStackImpl implements DoubleStack{
 
-	static final int INITIAL_MAX_NUMBER_OF_ELEMENTS=1;
+	static final int INITIAL_MAX_NUMBER_OF_ELEMENTS=1;//size 1 is for testing purposes of copyElements/ increaseStackSize
 	Double[] stackArray;
 	int numberOfElements;
 	
@@ -25,7 +25,7 @@ public class DoubleStackImpl implements DoubleStack{
 	void increaseStackSize(){
 		int newStackArraySize=stackArray.length*2;
 		Double[] newStackArray=new Double[newStackArraySize];
-		copyElements(newStackArray,stackArray,stackArray.length);//to be fixed
+		copyElements(newStackArray,stackArray,stackArray.length);
 		stackArray=newStackArray;
 	}
 	

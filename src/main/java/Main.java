@@ -59,7 +59,7 @@ public class Main implements CalculatorInterface{
 	
 	public boolean tokenIsOperator(String token){
     	Scanner tokenScanner=new Scanner(token);
-    	return OPERATOR_TOKENS.contains(tokenScanner.next()); // not sure if this works
+    	return OPERATOR_TOKENS.contains(tokenScanner.next());
     }
 	
 	public boolean tokenIsDouble(String token){	
@@ -69,7 +69,7 @@ public class Main implements CalculatorInterface{
 	
 	public boolean tokenIsParenthesis(String token){
     	Scanner tokenScanner=new Scanner(token);
-    	return PARENTHESIS_TOKENS.contains(tokenScanner.next()); // not sure if this works
+    	return PARENTHESIS_TOKENS.contains(tokenScanner.next());
     }
 	
 	public Double rpn(TokenList rpnExpression){

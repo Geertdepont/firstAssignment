@@ -1,7 +1,7 @@
 
 public class TokenStackImpl implements TokenStack{
 	
-	static final int INITIAL_MAX_NUMBER_OF_ELEMENTS=1;//size 1 is for testing purposes of copyElements/ increaseListSize
+	static final int INITIAL_MAX_NUMBER_OF_ELEMENTS=1;//size 1 is for testing purposes of copyElements/ increaseStackSize
 	
 	Token[] stackArray;
 	int numberOfElements;
@@ -32,7 +32,7 @@ public class TokenStackImpl implements TokenStack{
 	void increaseStackSize(){
 		int newStackArraySize=stackArray.length*2;
 		Token[] newStackArray=new Token[newStackArraySize];
-		copyElements(newStackArray,stackArray,stackArray.length);//to be fixed
+		copyElements(newStackArray,stackArray,stackArray.length);
 		stackArray=newStackArray;
 	}
 	

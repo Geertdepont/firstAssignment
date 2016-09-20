@@ -3,7 +3,7 @@ public class NumberToken implements Token{
 	
 	private static final int PRECEDENCE=-1;
 	
-	private double value;// depends if this should be a string
+	private double value;
 	
 	NumberToken(){//default constructor
 		value=0;
@@ -13,7 +13,7 @@ public class NumberToken implements Token{
 		value=token.value;
 	}
 	
-	NumberToken(double token){//the constructor that takes a String as parameter
+	NumberToken(double token){//the constructor that takes a double as parameter
 		value=token;
 	}
 

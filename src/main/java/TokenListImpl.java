@@ -1,7 +1,7 @@
 
 public class TokenListImpl implements TokenList{
 	
-	static final int INITIAL_MAX_NUMBER_OF_ELEMENTS=1;
+	static final int INITIAL_MAX_NUMBER_OF_ELEMENTS=1;//size 1 is for testing purposes of copyElements/ increaseListSize
 	
 	Token[] tokenArray;
 	int numberOfElements;
@@ -32,19 +32,17 @@ public class TokenListImpl implements TokenList{
 	void increaseListSize(){
 		int newTokenArraySize=tokenArray.length*2;
 		Token[] newTokenArray=new Token[newTokenArraySize];
-		copyElements(newTokenArray,tokenArray,tokenArray.length);//to be fixed
+		copyElements(newTokenArray,tokenArray,tokenArray.length);
 		tokenArray=newTokenArray;
 	}
 	 
-	public void add(Token token){//change implementation to support arbitrarily long lists
+	public void add(Token token){
 		if(numberOfElements==tokenArray.length){
 			increaseListSize();
 		}
 		tokenArray[numberOfElements]=token;
 		numberOfElements +=1;
 	}
-
-	//Assuming the index starts with 0
 
 	public void remove(int index){
 		for(int i=index;i<numberOfElements;i++){
