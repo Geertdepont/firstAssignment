@@ -114,7 +114,7 @@ public class Main implements CalculatorInterface{
 			if(token.getType()==Token.NUMBER_TYPE){
 				rpnExpression.add(token);
 			}else if(token.getType()==Token.OPERATOR_TYPE){
-				while(!operatorStack.isEmpty() && token.getPrecedence()<operatorStack.top().getPrecedence()){
+				while(!operatorStack.isEmpty() && token.getPrecedence()<=operatorStack.top().getPrecedence()){
 					rpnExpression.add(operatorStack.pop());
 				}
 				operatorStack.push(token);
@@ -129,7 +129,16 @@ public class Main implements CalculatorInterface{
 				operatorStack.pop();
 			}
 		}
-		for(int i=0;i<operatorStack.size();i++){
+//		for(int i=0;i<operatorStack.size();i++){ // this doesn't work, because the stacksize decreases in every iteration (simple input to test this is 1 + 2 * 3)
+//			rpnExpression.add(operatorStack.pop());
+//		}
+//		I suggest one of the two approaches:
+//		int operatorCount=operatorStack.size();
+//		for(int i=0;i<operatorCount;i++){
+//			rpnExpression.add(operatorStack.pop());
+//		}
+//		OR
+		while(!operatorStack.isEmpty()){
 			rpnExpression.add(operatorStack.pop());
 		}
 		return rpnExpression;
@@ -142,11 +151,11 @@ public class Main implements CalculatorInterface{
 		Scanner inputScanner=new Scanner(in);
 		
 		while(inputScanner.hasNext()){
-			TokenListImpl example=(TokenListImpl) readTokens(inputScanner.nextLine());
-			TokenListImpl ordered=(TokenListImpl) shuntingYard(example);
+			TokenList example=readTokens(inputScanner.nextLine());
+			TokenList ordered=shuntingYard(example);
 			
 //			for(int i= 0; i<example.size();i++){
-//				System.out.println(example.tokenRow[i].getType());
+//				System.out.println(example.tokenArray[i].getValue());
 //			}
 			out.println(rpn(ordered));
 		}
