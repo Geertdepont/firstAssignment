@@ -1,4 +1,3 @@
-
 public class OperatorToken implements Token{
 
 	private static final String OPERATORS_WITH_HIGHEST_PRECEDENCE="^";
@@ -9,10 +8,6 @@ public class OperatorToken implements Token{
 	private static final int THIRD_HIGHEST_PRECEDENCE=1;
 	
 	private String value;
-	
-	OperatorToken(){//default constructor
-		value="";
-	}
 	
 	OperatorToken(OperatorToken token){//copy constructor
 		value=token.value;
@@ -38,11 +33,8 @@ public class OperatorToken implements Token{
 			return HIGHEST_PRECEDENCE;
 		}else if(OPERATORS_WITH_SECOND_HIGHEST_PRECEDENCE.contains(value)){
 			return SECOND_HIGHEST_PRECEDENCE;
-		}else if(OPERATORS_WITH_THIRD_HIGHEST_PRECEDENCE.contains(value)){
+		}else{//OPERATORS_WITH_THIRD_HIGHEST_PRECEDENCE
 			return THIRD_HIGHEST_PRECEDENCE;
-		}else{//error which should not happen since only the operators (+, -, *, /, '^') can be OperatorToken-s
-			System.exit(1);
-			return 0;
 		}
 	}
 }

@@ -1,13 +1,8 @@
-
 public class NumberToken implements Token{
 	
 	private static final int PRECEDENCE=-1;
 	
 	private double value;
-	
-	NumberToken(){//default constructor
-		value=0;
-	}
 	
 	NumberToken(NumberToken token){//copy constructor
 		value=token.value;

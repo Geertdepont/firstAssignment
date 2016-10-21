@@ -28,6 +28,4 @@ public interface TokenStack {
      * @post The number of elements on the stack is returned
      */
     int size();
-    
-    boolean isEmpty();
 }

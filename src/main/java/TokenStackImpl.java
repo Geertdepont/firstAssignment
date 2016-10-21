@@ -1,23 +1,16 @@
-
 public class TokenStackImpl implements TokenStack{
 	
-	static final int INITIAL_MAX_NUMBER_OF_ELEMENTS=1;//size 1 is for testing purposes of copyElements/ increaseStackSize
+	private static final int INITIAL_MAX_NUMBER_OF_ELEMENTS=10;
 	
-	Token[] stackArray;
-	int numberOfElements;
+	private Token[] stackArray;
+	private int numberOfElements;
 
 	TokenStackImpl(){
 		stackArray=new Token[INITIAL_MAX_NUMBER_OF_ELEMENTS];
 		numberOfElements=0;
 	}
 	
-	TokenStackImpl(TokenStackImpl source){
-		stackArray=new Token[source.stackArray.length];
-		numberOfElements=source.numberOfElements;
-		copyElements(stackArray,source.stackArray,numberOfElements);
-	}
-	
-	void copyElements(Token[] destination, Token[] source, int numberOfElements){
+	private void copyElements(Token[] destination, Token[] source, int numberOfElements){
 		for(int i=0;i<numberOfElements;i++){
 			if(source[i].getType()==Token.NUMBER_TYPE){
 				destination[i]=new NumberToken((NumberToken)source[i]);
@@ -29,7 +22,7 @@ public class TokenStackImpl implements TokenStack{
 		}
 	}
 	
-	void increaseStackSize(){
+	private void increaseStackSize(){
 		int newStackArraySize=stackArray.length*2;
 		Token[] newStackArray=new Token[newStackArraySize];
 		copyElements(newStackArray,stackArray,stackArray.length);
@@ -67,7 +60,4 @@ public class TokenStackImpl implements TokenStack{
 		return numberOfElements;
 	}
 	
-	public boolean isEmpty(){
-		return numberOfElements==0;
-	}
 }
